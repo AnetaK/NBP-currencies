@@ -4,6 +4,7 @@ import org.junit.Test;
 import pl.parser.nbp.model.ReturnedCoursesData;
 import pl.parser.nbp.model.ReturnedRates;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -32,8 +33,8 @@ public class ParseJsonFileTest {
         ParseJsonFile parseJsonFile = new ParseJsonFile();
         ReturnedCoursesData returnedJson = parseJsonFile.parse(jsonString);
         List<ReturnedRates> returnedRates = returnedJson.getRates();
-        Double mid1 = returnedRates.get(0).getBid();
-        Double mid2 = returnedRates.get(1).getBid();
+        BigDecimal mid1 = returnedRates.get(0).getBid();
+        BigDecimal mid2 = returnedRates.get(1).getBid();
 
         //then
         assertThat("Size of json list in not corrrect", returnedJson.getRates().size(), is(equalTo(2)));
