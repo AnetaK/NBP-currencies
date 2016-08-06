@@ -2,7 +2,6 @@ package pl.parser.nbp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.parser.nbp.model.Table;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +12,10 @@ import java.net.URL;
 
 public class AquireDataFromNBP {
 
-    private static final String HTTP_API = "http://api.nbp.pl/api/exchangerates/rates/";
-    private final String table = String.valueOf(Table.a);
     private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
+
+    private static final String HTTP_API = "http://api.nbp.pl/api/exchangerates/rates/";
+    private final String table = "c";
 
     public String acuire(String code, String startDate, String endDate) {
 

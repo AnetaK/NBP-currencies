@@ -3,7 +3,8 @@ package pl.parser.nbp.model;
 public class ReturnedRates {
     String no;
     String effectiveDate;
-    Double mid;
+    Double bid;
+    Double ask;
 
     public String getNo() {
         return no;
@@ -13,8 +14,12 @@ public class ReturnedRates {
         return effectiveDate;
     }
 
-    public Double getMid() {
-        return mid;
+    public Double getBid() {
+        return bid;
+    }
+
+    public Double getAsk() {
+        return ask;
     }
 
     @Override
@@ -22,7 +27,8 @@ public class ReturnedRates {
         return "ReturnedRates{" +
                 "no='" + no + '\'' +
                 ", effectiveDate='" + effectiveDate + '\'' +
-                ", mid=" + mid +
+                ", bid=" + bid +
+                ", ask=" + ask +
                 '}';
     }
 }

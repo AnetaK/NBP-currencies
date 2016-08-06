@@ -4,12 +4,12 @@ public class RequestParams {
     private String currency;
     private String startDate;
     private String endDate;
-    private Table table;
+    private String table;
 
     public RequestParams() {
     }
 
-    private RequestParams(String currency, String startDate, String endDate, Table table) {
+    private RequestParams(String currency, String startDate, String endDate, String table) {
         this.currency = currency;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -31,7 +31,7 @@ public class RequestParams {
         return this;
     }
 
-    public RequestParams withTable(Table table){
+    public RequestParams withTable(String table){
         this.table = table;
         return this;
     }
