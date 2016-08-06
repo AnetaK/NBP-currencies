@@ -38,8 +38,8 @@ public class ParseJsonFileTest {
 
         //then
         assertThat("Size of json list in not corrrect", returnedJson.getRates().size(), is(equalTo(2)));
-        assertThat("'mid' value has wrong content in first iteration", mid1, is(equalTo(3.9040)));
-        assertThat("'mid' value has wrong content in second iteration", mid2, is(equalTo(3.8820)));
+        assertThat("'mid' value has wrong content in first iteration", mid1, is(equalTo(new BigDecimal(3.9040).setScale(4,BigDecimal.ROUND_HALF_UP))));
+        assertThat("'mid' value has wrong content in second iteration", mid2, is(equalTo(new BigDecimal(3.8820).setScale(4,BigDecimal.ROUND_HALF_UP))));
     }
 
 }
