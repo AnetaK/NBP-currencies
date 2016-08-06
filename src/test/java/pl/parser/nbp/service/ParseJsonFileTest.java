@@ -1,7 +1,7 @@
 package pl.parser.nbp.service;
 
 import org.junit.Test;
-import pl.parser.nbp.model.ReturnedData;
+import pl.parser.nbp.model.ReturnedCoursesData;
 import pl.parser.nbp.model.ReturnedRates;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class ParseJsonFileTest {
 
         //when
         ParseJsonFile parseJsonFile = new ParseJsonFile();
-        ReturnedData returnedJson = parseJsonFile.parse(jsonString);
+        ReturnedCoursesData returnedJson = parseJsonFile.parse(jsonString);
         List<ReturnedRates> returnedRates = returnedJson.getRates();
         Double mid1 = returnedRates.get(0).getBid();
         Double mid2 = returnedRates.get(1).getBid();

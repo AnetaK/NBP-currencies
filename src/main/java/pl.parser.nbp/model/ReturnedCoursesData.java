@@ -2,7 +2,7 @@ package pl.parser.nbp.model;
 
 import java.util.List;
 
-public class ReturnedData {
+public class ReturnedCoursesData {
 
     String table;
     String currency;
@@ -27,7 +27,7 @@ public class ReturnedData {
 
     @Override
     public String toString() {
-        return "ReturnedData{" +
+        return "ReturnedCoursesData{" +
                 "table='" + table + '\'' +
                 ", currency='" + currency + '\'' +
                 ", code='" + code + '\'' +
