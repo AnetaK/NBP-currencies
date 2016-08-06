@@ -40,6 +40,22 @@ public class RequestParams {
         return new RequestParams(currency, startDate, endDate, table);
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public String getTable() {
+        return table;
+    }
+
     @Override
     public String toString() {
         return "RequestParams{" +

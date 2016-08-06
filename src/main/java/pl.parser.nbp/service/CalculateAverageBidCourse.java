@@ -1,26 +1,33 @@
 package pl.parser.nbp.service;
 
-import pl.parser.nbp.model.ReturnedCoursesData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pl.parser.nbp.exception.NoDataReturnedFromAPI;
 import pl.parser.nbp.model.ReturnedRates;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CalculateAverageBidCourse {
-    public BigDecimal calculate(List<ReturnedRates> returnedRates){
+    private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
 
-        BigDecimal divisor = BigDecimal.valueOf(returnedRates.size());
+    public BigDecimal calculate(List<ReturnedRates> returnedRates) throws NoDataReturnedFromAPI {
+        LOGGER.debug("Calculating bids average ...");
+        if(returnedRates.size() != 0) {
+            BigDecimal divisor = BigDecimal.valueOf(returnedRates.size());
 
-        BigDecimal sum = returnedRates.stream()
-                .filter(s -> s != null)
-                .map(ReturnedRates::getBid)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-//                .collect(Collectors.toList());
-//        bids.stream().filter(b -> b != null).
-        BigDecimal calculationResult = sum.divide(divisor).setScale(4,BigDecimal.ROUND_HALF_UP);
-        System.out.println("calculationResult = " + calculationResult);
+            BigDecimal sum = returnedRates.stream()
+                    .filter(s -> s != null)
+                    .map(ReturnedRates::getBid)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            LOGGER.trace("Calculated sum = " + sum);
+            LOGGER.trace("Divisor = " + divisor);
+            BigDecimal calculationResult = sum.divide(divisor).setScale(4, BigDecimal.ROUND_HALF_UP);
+            LOGGER.debug("Bids average = " + calculationResult);
 
-        return calculationResult;
+            return calculationResult;
+        }else{
+            throw new NoDataReturnedFromAPI();
+        }
     }
 }

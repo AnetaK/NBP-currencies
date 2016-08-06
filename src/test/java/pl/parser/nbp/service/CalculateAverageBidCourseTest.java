@@ -1,6 +1,7 @@
 package pl.parser.nbp.service;
 
 import org.junit.Test;
+import pl.parser.nbp.exception.NoDataReturnedFromAPI;
 import pl.parser.nbp.model.ReturnedRates;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class CalculateAverageBidCourseTest {
 
     @Test
-    public void should_calculate_bid_avg() {
+    public void should_calculate_bid_avg() throws NoDataReturnedFromAPI {
         List<ReturnedRates> returnedRates = new ArrayList<>();
         returnedRates.add(new ReturnedRates().withBid(new BigDecimal(1)).build());
         returnedRates.add(new ReturnedRates().withBid(new BigDecimal(2)).build());

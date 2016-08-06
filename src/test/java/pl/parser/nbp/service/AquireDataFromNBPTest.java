@@ -1,6 +1,7 @@
 package pl.parser.nbp.service;
 
 import org.junit.Test;
+import pl.parser.nbp.model.RequestParams;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -14,10 +15,16 @@ public class AquireDataFromNBPTest {
         String currencyCode = "usd";
         String startDate = "2016-08-01";
         String endDate = "2016-08-06";
+        String table ="c";
 
         //when
         AquireDataFromNBP dataFromNBP = new AquireDataFromNBP();
-        String json = dataFromNBP.acuire(currencyCode, startDate, endDate);
+        String json = dataFromNBP.acuire(new RequestParams()
+                .withTable(table)
+                .withCurrency(currencyCode)
+                .withStartDate(startDate)
+                .withEndDate(endDate)
+                .build());
 
         //then
         assertThat("returned data is empty",json.length(),is(not(0)));
