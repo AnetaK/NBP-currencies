@@ -20,9 +20,14 @@ public class MainClassTest {
 //    }
 
     @Test
-    public void should_Return_Course_And_Deviation () {
+    public void should_return_average_course () {
+        //given
         MainClass mainClass = new MainClass("EUR","2016-01-01","2016-08-06");
 
+        //when
+//        mainClass.
+
+        //then
 
 
     }
