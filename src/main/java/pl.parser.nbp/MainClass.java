@@ -2,6 +2,7 @@ package pl.parser.nbp;
 
 import pl.parser.nbp.exception.NoDataReturnedFromAPIException;
 import pl.parser.nbp.exception.WrongHttpResponceException;
+import pl.parser.nbp.exception.WrongInputParametersException;
 import pl.parser.nbp.model.RequestParams;
 import pl.parser.nbp.model.ReturnedRates;
 import pl.parser.nbp.service.*;
@@ -15,7 +16,7 @@ public class MainClass
     private RequestParams requestParams = new RequestParams();
     private InputValidation validation = new InputValidation();
 
-    public MainClass(String currency, String startDate, String endDate ) {
+    public MainClass(String currency, String startDate, String endDate ) throws WrongInputParametersException {
         requestParams.withCurrency(currency)
                 .withStartDate(startDate)
                 .withEndDate(endDate)
