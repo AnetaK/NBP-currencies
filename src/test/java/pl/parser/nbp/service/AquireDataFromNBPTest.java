@@ -1,7 +1,7 @@
 package pl.parser.nbp.service;
 
 import org.junit.Test;
-import pl.parser.nbp.exception.WrongHttpResponce;
+import pl.parser.nbp.exception.WrongHttpResponceException;
 import pl.parser.nbp.model.RequestParams;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public class AquireDataFromNBPTest {
 
     @Test
-    public void should_return_json_with_courses_for_USD() throws Exception, WrongHttpResponce {
+    public void should_return_json_with_courses_for_USD() throws Exception, WrongHttpResponceException {
         //given
         String currencyCode = "usd";
         String startDate = "2016-08-01";

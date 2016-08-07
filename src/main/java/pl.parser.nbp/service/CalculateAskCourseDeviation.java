@@ -2,7 +2,7 @@ package pl.parser.nbp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.parser.nbp.exception.NoDataReturnedFromAPI;
+import pl.parser.nbp.exception.NoDataReturnedFromAPIException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,7 +11,7 @@ public class CalculateAskCourseDeviation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CalculateAskCourseDeviation.class);
 
-    public BigDecimal calculate(List<BigDecimal> asks) throws NoDataReturnedFromAPI {
+    public BigDecimal calculate(List<BigDecimal> asks) throws NoDataReturnedFromAPIException {
         LOGGER.debug("Calculating asks standard deviation ...");
         if (asks.size() != 0) {
             BigDecimal divisor = BigDecimal.valueOf(asks.size());
@@ -36,7 +36,7 @@ public class CalculateAskCourseDeviation {
             return deviation;
 
         } else {
-            throw new NoDataReturnedFromAPI();
+            throw new NoDataReturnedFromAPIException();
         }
     }
 }

@@ -2,7 +2,7 @@ package pl.parser.nbp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.parser.nbp.exception.NoDataReturnedFromAPI;
+import pl.parser.nbp.exception.NoDataReturnedFromAPIException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 public class CalculateAverageBidCourse {
     private static final Logger LOGGER = LoggerFactory.getLogger(CalculateAverageBidCourse.class);
 
-    public BigDecimal calculate(List<BigDecimal> bids) throws NoDataReturnedFromAPI {
+    public BigDecimal calculate(List<BigDecimal> bids) throws NoDataReturnedFromAPIException {
         LOGGER.debug("Calculating bids average ...");
         if(bids.size() != 0) {
             BigDecimal divisor = BigDecimal.valueOf(bids.size());
@@ -24,7 +24,7 @@ public class CalculateAverageBidCourse {
 
             return calculationResult;
         }else{
-            throw new NoDataReturnedFromAPI();
+            throw new NoDataReturnedFromAPIException();
         }
     }
 }

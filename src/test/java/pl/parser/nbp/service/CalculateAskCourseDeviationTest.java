@@ -1,8 +1,7 @@
 package pl.parser.nbp.service;
 
 import org.junit.Test;
-import pl.parser.nbp.exception.NoDataReturnedFromAPI;
-import pl.parser.nbp.model.ReturnedRates;
+import pl.parser.nbp.exception.NoDataReturnedFromAPIException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class CalculateAskCourseDeviationTest {
     @Test
-    public void calculate() throws Exception, NoDataReturnedFromAPI {
+    public void calculate() throws Exception, NoDataReturnedFromAPIException {
         List<BigDecimal> asks = new ArrayList<>();
         asks.add(new BigDecimal(1));
         asks.add(new BigDecimal(2));

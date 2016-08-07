@@ -2,7 +2,7 @@ package pl.parser.nbp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.parser.nbp.exception.WrongHttpResponce;
+import pl.parser.nbp.exception.WrongHttpResponceException;
 import pl.parser.nbp.model.RequestParams;
 
 import java.io.BufferedReader;
@@ -19,7 +19,7 @@ public class AquireDataFromNBP {
     private static final String HTTP_API = "http://api.nbp.pl/api/exchangerates/rates/";
     private static final String TABLE = "c";
 
-    private String getDataFromURL(URL url) throws WrongHttpResponce {
+    private String getDataFromURL(URL url) throws WrongHttpResponceException {
         try {
             LOGGER.debug("Getting data from URL: {}", url.toString());
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -27,7 +27,7 @@ public class AquireDataFromNBP {
             urlConnection.setRequestProperty("Accept", "application/json");
 
             if (urlConnection.getResponseCode() != 200) {
-                throw new WrongHttpResponce("Failed : HTTP error code : "
+                throw new WrongHttpResponceException("Failed : HTTP error code : "
                         + urlConnection.getResponseCode());
             }
 
@@ -51,7 +51,7 @@ public class AquireDataFromNBP {
         return "";
     }
 
-    public String acuireForSingleDay(String currencyCode, LocalDate date) throws WrongHttpResponce {
+    public String acuireForSingleDay(String currencyCode, LocalDate date) throws WrongHttpResponceException {
         try {
             URL url = new URL(HTTP_API + TABLE + "/" + currencyCode + "/" + date + "/");
             return getDataFromURL(url);
@@ -62,7 +62,7 @@ public class AquireDataFromNBP {
     }
 
 
-    public String acuireForRange(RequestParams requestParams) throws WrongHttpResponce {
+    public String acuireForRange(RequestParams requestParams) throws WrongHttpResponceException {
         try {
             URL url = new URL(HTTP_API + TABLE + "/" + requestParams.getCurrency() +
                     "/" + requestParams.getStartDate() + "/" + requestParams.getEndDate() + "/");

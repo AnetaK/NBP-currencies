@@ -1,7 +1,7 @@
 package pl.parser.nbp.service;
 
 import org.junit.Test;
-import pl.parser.nbp.exception.WrongHttpResponce;
+import pl.parser.nbp.exception.WrongHttpResponceException;
 import pl.parser.nbp.model.RequestParams;
 import pl.parser.nbp.model.ReturnedRates;
 
@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ReturnRatesForRangeTest {
 
     @Test
-    public void should_return_151_elements_for_range() throws Exception, WrongHttpResponce {
+    public void should_return_151_elements_for_range() throws Exception, WrongHttpResponceException {
 
         ReturnRatesForRange returnRatesForRange = new ReturnRatesForRange();
         RequestParams requestParams = new RequestParams()
@@ -28,7 +28,7 @@ public class ReturnRatesForRangeTest {
         assertThat("wrong number of elements returned",returnedRates.size(),is(equalTo(151)));
     }
     @Test
-    public void should_return_1_element_for_range() throws Exception, WrongHttpResponce {
+    public void should_return_1_element_for_range() throws Exception, WrongHttpResponceException {
 
         ReturnRatesForRange returnRatesForRange = new ReturnRatesForRange();
         RequestParams requestParams = new RequestParams()

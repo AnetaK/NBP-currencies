@@ -1,7 +1,7 @@
 package pl.parser.nbp;
 
-import pl.parser.nbp.exception.NoDataReturnedFromAPI;
-import pl.parser.nbp.exception.WrongHttpResponce;
+import pl.parser.nbp.exception.NoDataReturnedFromAPIException;
+import pl.parser.nbp.exception.WrongHttpResponceException;
 import pl.parser.nbp.model.RequestParams;
 import pl.parser.nbp.model.ReturnedRates;
 import pl.parser.nbp.service.*;
@@ -12,17 +12,18 @@ import java.util.stream.Collectors;
 
 public class MainClass
 {
-    private static final String TABLE = "c";
     private RequestParams requestParams = new RequestParams();
+    private InputValidation validation = new InputValidation();
 
     public MainClass(String currency, String startDate, String endDate ) {
         requestParams.withCurrency(currency)
                 .withStartDate(startDate)
                 .withEndDate(endDate)
                 .build();
+        validation.validate(requestParams);
 }
 
-    public void calculateAverangeAndDeviation() throws NoDataReturnedFromAPI, WrongHttpResponce {
+    public void calculateAverangeAndDeviation() throws NoDataReturnedFromAPIException, WrongHttpResponceException {
 
         CalculateAverageBidCourse avg = new CalculateAverageBidCourse();
         CalculateAskCourseDeviation dev = new CalculateAskCourseDeviation();
