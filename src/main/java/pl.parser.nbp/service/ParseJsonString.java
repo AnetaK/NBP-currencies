@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.parser.nbp.model.ReturnedCoursesData;
 
-public class ParseJsonFile {
+public class ParseJsonString {
     private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
 
     public ReturnedCoursesData parse (String jsonString){

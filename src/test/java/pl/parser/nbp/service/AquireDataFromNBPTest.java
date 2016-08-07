@@ -5,7 +5,7 @@ import pl.parser.nbp.model.RequestParams;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class AquireDataFromNBPTest {
 
@@ -28,7 +28,8 @@ public class AquireDataFromNBPTest {
 
         //then
         assertThat("returned data is empty",json.length(),is(not(0)));
-
     }
+
+
 
 }

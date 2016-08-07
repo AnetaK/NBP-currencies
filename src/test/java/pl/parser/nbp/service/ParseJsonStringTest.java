@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class ParseJsonFileTest {
+public class ParseJsonStringTest {
 
     @Test
     public void should_return_list_of_json_elements() {
@@ -30,8 +30,8 @@ public class ParseJsonFileTest {
                 "\"ask\":3.9474}]}";
 
         //when
-        ParseJsonFile parseJsonFile = new ParseJsonFile();
-        ReturnedCoursesData returnedJson = parseJsonFile.parse(jsonString);
+        ParseJsonString parseJsonString = new ParseJsonString();
+        ReturnedCoursesData returnedJson = parseJsonString.parse(jsonString);
         List<ReturnedRates> returnedRates = returnedJson.getRates();
         BigDecimal mid1 = returnedRates.get(0).getBid();
         BigDecimal mid2 = returnedRates.get(1).getBid();
