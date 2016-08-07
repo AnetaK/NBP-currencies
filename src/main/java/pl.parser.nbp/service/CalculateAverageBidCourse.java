@@ -3,7 +3,6 @@ package pl.parser.nbp.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.parser.nbp.exception.NoDataReturnedFromAPI;
-import pl.parser.nbp.model.ReturnedRates;
 
 import java.math.BigDecimal;
 import java.util.List;
