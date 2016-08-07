@@ -22,7 +22,7 @@ public class CalculateAverageBidCourse {
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
             LOGGER.trace("Calculated sum = " + sum);
             LOGGER.trace("Divisor = " + divisor);
-            BigDecimal calculationResult = sum.divide(divisor).setScale(4, BigDecimal.ROUND_HALF_UP);
+            BigDecimal calculationResult = sum.divide(divisor,4,BigDecimal.ROUND_HALF_UP);
             LOGGER.debug("Bids average = " + calculationResult);
 
             return calculationResult;
