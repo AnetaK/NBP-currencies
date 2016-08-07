@@ -19,7 +19,7 @@ public class AquireDataFromNBPTest {
 
         //when
         AquireDataFromNBP dataFromNBP = new AquireDataFromNBP();
-        String json = dataFromNBP.acuire(new RequestParams()
+        String json = dataFromNBP.acuireForRange(new RequestParams()
                 .withTable(table)
                 .withCurrency(currencyCode)
                 .withStartDate(startDate)

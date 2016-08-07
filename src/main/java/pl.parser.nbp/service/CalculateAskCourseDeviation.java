@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CalculateAskCourseDeviation {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CalculateAskCourseDeviation.class);
 
     public BigDecimal calculate(List<BigDecimal> asks) throws NoDataReturnedFromAPI {
         LOGGER.debug("Calculating asks standard deviation ...");

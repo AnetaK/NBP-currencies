@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class CalculateAverageBidCourse {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CalculateAverageBidCourse.class);
 
     public BigDecimal calculate(List<BigDecimal> bids) throws NoDataReturnedFromAPI {
         LOGGER.debug("Calculating bids average ...");

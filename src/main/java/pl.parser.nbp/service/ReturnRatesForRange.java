@@ -12,9 +12,8 @@ import java.util.List;
 
 public class ReturnRatesForRange {
     private ParseJsonString parsejsonString = new ParseJsonString();
-    private AquireDataFromNBP dataFromNBP = new AquireDataFromNBP();
     private List<ReturnedRates> outputData = new ArrayList<>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReturnRatesForRange.class);
 
     public List<ReturnedRates> returnRates(RequestParams params) {
 
@@ -22,27 +21,32 @@ public class ReturnRatesForRange {
         LocalDate endDate = LocalDate.parse(params.getEndDate());
 
         Integer differenceInDays = endDate.getDayOfYear() - startDate.getDayOfYear();
-        LOGGER.debug("Entire number of days for calculation = " + differenceInDays);
+        LOGGER.debug("Entire number of days for calculation = {}", differenceInDays + 1);
 
-        int iterCount = differenceInDays % 93 == 0 ? differenceInDays / 93 : differenceInDays / 93 + 1;
-        LOGGER.debug("Due to API limitations (it can send data for no more than 93 days at once) " +
-                "request will be divided to {} parts", iterCount);
+        if (differenceInDays == 0) {
+            return outputData = parsejsonString.parse(new AquireDataFromNBP().acuireForSingleDay(params.getCurrency(), startDate)).getRates();
+        } else {
 
-        for (int i = 0; i < iterCount; i++) {
-            LocalDate tmpStartDate = i == 0 ? startDate.plusDays(93 * i) : startDate.plusDays(93 * i + 1);
-            LocalDate tmpEndDate = differenceInDays % 93 == 0 || i < iterCount - 1 ? startDate.plusDays(93 * (i + 1)) : endDate;
+            int iterCount = differenceInDays % 93 == 0 ? differenceInDays / 93 : differenceInDays / 93 + 1;
+            LOGGER.debug("Due to API limitations (it can send data for no more than 93 days at once) " +
+                    "request will be divided to {} parts", iterCount);
 
-            LOGGER.trace("Start date = {} for part {}", tmpStartDate, i + 1);
-            LOGGER.trace("End date = {} for part {}", tmpEndDate, i + 1);
+            for (int i = 0; i < iterCount; i++) {
+                LocalDate tmpStartDate = i == 0 ? startDate.plusDays(93 * i) : startDate.plusDays(93 * i + 1);
+                LocalDate tmpEndDate = differenceInDays % 93 == 0 || i < iterCount - 1 ? startDate.plusDays(93 * (i + 1)) : endDate;
 
-            RequestParams tmpRequestParams = params.withStartDate(tmpStartDate.toString()).withEndDate(tmpEndDate.toString()).build();
-            ReturnedCoursesData jsonDataFromNBP = parsejsonString
-                    .parse(dataFromNBP.acuire(tmpRequestParams));
-            LOGGER.trace("Number od currency rates acquired from API = {} in part {}", jsonDataFromNBP.getRates().size(), i + 1);
-            outputData.addAll(jsonDataFromNBP.getRates());
+                LOGGER.trace("Start date = {} for part {}", tmpStartDate, i + 1);
+                LOGGER.trace("End date = {} for part {}", tmpEndDate, i + 1);
+
+                RequestParams tmpRequestParams = params.withStartDate(tmpStartDate.toString()).withEndDate(tmpEndDate.toString()).build();
+                ReturnedCoursesData jsonDataFromNBP = parsejsonString
+                        .parse(new AquireDataFromNBP().acuireForRange(tmpRequestParams));
+                LOGGER.trace("Number od currency rates acquired from API = {} in part {}", jsonDataFromNBP.getRates().size(), i + 1);
+                outputData.addAll(jsonDataFromNBP.getRates());
+            }
+
+            LOGGER.debug("Number of currency rates acquired for entire range = " + outputData.size());
+            return outputData;
         }
-
-        LOGGER.debug("Number of currency rates acquired for entire range = " + outputData.size());
-        return outputData;
     }
 }
