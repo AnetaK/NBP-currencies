@@ -13,18 +13,15 @@ import java.util.stream.Collectors;
 
 public class MainClass
 {
-    private RequestParams requestParams = new RequestParams();
-    private InputValidation validation = new InputValidation();
+    public static void main(String[] args) throws NoDataReturnedFromAPIException, WrongHttpResponceException, WrongInputParametersException {
+        RequestParams requestParams = new RequestParams();
+        InputValidation validation = new InputValidation();
 
-    public MainClass(String currency, String startDate, String endDate ) throws WrongInputParametersException {
-        requestParams.withCurrency(currency)
-                .withStartDate(startDate)
-                .withEndDate(endDate)
+        requestParams.withCurrency(args[0])
+                .withStartDate(args[1])
+                .withEndDate(args[2])
                 .build();
         validation.validate(requestParams);
-}
-
-    public void calculateAverangeAndDeviation() throws NoDataReturnedFromAPIException, WrongHttpResponceException {
 
         CalculateAverageBidCourse avg = new CalculateAverageBidCourse();
         CalculateAskCourseDeviation dev = new CalculateAskCourseDeviation();

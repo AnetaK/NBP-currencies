@@ -1,7 +1,7 @@
 package pl.parser.nbp.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.parser.nbp.exception.WrongHttpResponceException;
 import pl.parser.nbp.model.RequestParams;
 
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public class AquireDataFromNBP {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final String HTTP_API = "http://api.nbp.pl/api/exchangerates/rates/";
     private static final String TABLE = "c";
 

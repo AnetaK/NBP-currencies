@@ -1,5 +1,7 @@
 package pl.parser.nbp.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.parser.nbp.exception.WrongInputParametersException;
 import pl.parser.nbp.model.AllowedCurrencies;
 import pl.parser.nbp.model.RequestParams;
@@ -7,17 +9,19 @@ import pl.parser.nbp.model.RequestParams;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputValidation {
+    private static final Logger LOGGER = LogManager.getLogger();
+
     public void validate(RequestParams inputParams) throws WrongInputParametersException {
+        LOGGER.debug("Validation of input parameters in progress");
         String currencyToCheck = inputParams.getCurrency().toUpperCase();
         checkCurrency(currencyToCheck);
         checkDateFormat(inputParams.getStartDate());
         checkDateFormat(inputParams.getEndDate());
         checkDatesOrder(inputParams.getStartDate(), inputParams.getEndDate());
+        LOGGER.debug("Validation of input parameter passed");
     }
 
     private void checkCurrency(String currencyToCheck) throws WrongInputParametersException {

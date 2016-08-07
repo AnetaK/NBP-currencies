@@ -1,7 +1,7 @@
 package pl.parser.nbp.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.parser.nbp.exception.NoDataReturnedFromAPIException;
 
 import java.math.BigDecimal;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CalculateAskCourseDeviation {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CalculateAskCourseDeviation.class);
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public BigDecimal calculate(List<BigDecimal> asks) throws NoDataReturnedFromAPIException {
         LOGGER.debug("Calculating asks standard deviation ...");

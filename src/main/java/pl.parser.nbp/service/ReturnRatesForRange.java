@@ -1,7 +1,7 @@
 package pl.parser.nbp.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.parser.nbp.exception.WrongHttpResponceException;
 import pl.parser.nbp.model.RequestParams;
 import pl.parser.nbp.model.ReturnedCoursesData;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReturnRatesForRange {
+    private static final Logger LOGGER = LogManager.getLogger();
     private ParseJsonString parsejsonString = new ParseJsonString();
     private List<ReturnedRates> outputData = new ArrayList<>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReturnRatesForRange.class);
 
     public List<ReturnedRates> returnRates(RequestParams params) throws WrongHttpResponceException {
 
