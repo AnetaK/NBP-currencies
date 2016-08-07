@@ -2,7 +2,6 @@ package pl.parser.nbp;
 
 import pl.parser.nbp.exception.NoDataReturnedFromAPI;
 import pl.parser.nbp.model.RequestParams;
-import pl.parser.nbp.model.ReturnedCoursesData;
 import pl.parser.nbp.model.ReturnedRates;
 import pl.parser.nbp.service.*;
 
@@ -27,12 +26,12 @@ public class MainClass
 
         CalculateAverageBidCourse avg = new CalculateAverageBidCourse();
         CalculateAskCourseDeviation dev = new CalculateAskCourseDeviation();
-        CheckDatesRange check = new CheckDatesRange();
-        ReturnedCoursesData jsonDataFromNBP = check.check(requestParams);
+        ReturnRatesForRange check = new ReturnRatesForRange();
+        List<ReturnedRates> jsonDataFromNBP = check.returnRates(requestParams);
 
-        List<BigDecimal> asks = jsonDataFromNBP.getRates().stream().filter(s -> s != null)
+        List<BigDecimal> asks = jsonDataFromNBP.stream().filter(s -> s != null)
                 .map(ReturnedRates::getAsk).collect(Collectors.toList());
-        List<BigDecimal> bids = jsonDataFromNBP.getRates().stream().filter(s -> s != null)
+        List<BigDecimal> bids = jsonDataFromNBP.stream().filter(s -> s != null)
                 .map(ReturnedRates::getBid).collect(Collectors.toList());
 
         BigDecimal averageBids = avg.calculate(bids);

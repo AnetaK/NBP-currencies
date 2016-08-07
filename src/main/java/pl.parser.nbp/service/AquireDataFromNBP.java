@@ -43,7 +43,6 @@ public class AquireDataFromNBP {
                 entireJson = entireJson + output;
             }
             LOGGER.debug("Returned json size = " + entireJson.length());
-            LOGGER.trace("Returned json = " + entireJson.toString());
             urlConnection.disconnect();
 
             return entireJson;
