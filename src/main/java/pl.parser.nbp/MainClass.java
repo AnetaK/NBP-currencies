@@ -21,7 +21,7 @@ public class MainClass
                 .withEndDate(endDate)
                 .withTable(TABLE)
                 .build();
-    }
+}
 
     public void calculateAverangeAndDeviation() throws NoDataReturnedFromAPI {
 
@@ -29,7 +29,6 @@ public class MainClass
         CalculateAskCourseDeviation dev = new CalculateAskCourseDeviation();
         CheckDatesRange check = new CheckDatesRange();
         ReturnedCoursesData jsonDataFromNBP = check.check(requestParams);
-
 
         List<BigDecimal> asks = jsonDataFromNBP.getRates().stream().filter(s -> s != null)
                 .map(ReturnedRates::getAsk).collect(Collectors.toList());

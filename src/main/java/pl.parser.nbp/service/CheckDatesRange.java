@@ -9,6 +9,5 @@ public class CheckDatesRange {
         ParseJsonString parsejsonString = new ParseJsonString();
         ReturnedCoursesData jsonDataFromNBP = parsejsonString.parse(dataFromNBP.acuire(params));
         return jsonDataFromNBP;
-
     }
 }
