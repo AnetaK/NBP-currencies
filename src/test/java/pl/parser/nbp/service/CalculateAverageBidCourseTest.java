@@ -16,20 +16,20 @@ public class CalculateAverageBidCourseTest {
 
     @Test
     public void should_calculate_bid_avg() throws NoDataReturnedFromAPI {
-        List<ReturnedRates> returnedRates = new ArrayList<>();
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(1)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(2)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0.9)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0.9)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0.9)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0.2)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0.2)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0)).build());
-        returnedRates.add(new ReturnedRates().withBid(new BigDecimal(0)).build());
+        List<BigDecimal> bids = new ArrayList<>();
+        bids.add(new BigDecimal(1));
+        bids.add(new BigDecimal(2));
+        bids.add(new BigDecimal(0.9));
+        bids.add(new BigDecimal(0.9));
+        bids.add(new BigDecimal(0.9));
+        bids.add(new BigDecimal(0.2));
+        bids.add(new BigDecimal(0.2));
+        bids.add(new BigDecimal(0));
+        bids.add(new BigDecimal(0));
+        bids.add(new BigDecimal(0));
 
         CalculateAverageBidCourse calculateAvg = new CalculateAverageBidCourse();
-        BigDecimal calculatedValue = calculateAvg.calculate(returnedRates);
+        BigDecimal calculatedValue = calculateAvg.calculate(bids);
 
         assertThat("wrong avg calculated",calculatedValue,is(equalTo(new BigDecimal(0.6100).setScale(4,BigDecimal.ROUND_HALF_UP))));
     }

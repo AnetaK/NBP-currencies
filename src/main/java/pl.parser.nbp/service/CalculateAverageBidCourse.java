@@ -11,17 +11,15 @@ import java.util.List;
 public class CalculateAverageBidCourse {
     private static final Logger LOGGER = LoggerFactory.getLogger(AquireDataFromNBP.class);
 
-    public BigDecimal calculate(List<ReturnedRates> returnedRates) throws NoDataReturnedFromAPI {
+    public BigDecimal calculate(List<BigDecimal> bids) throws NoDataReturnedFromAPI {
         LOGGER.debug("Calculating bids average ...");
-        if(returnedRates.size() != 0) {
-            BigDecimal divisor = BigDecimal.valueOf(returnedRates.size());
+        if(bids.size() != 0) {
+            BigDecimal divisor = BigDecimal.valueOf(bids.size());
+            LOGGER.trace("Divisor = " + divisor);
 
-            BigDecimal sum = returnedRates.stream()
-                    .filter(s -> s != null)
-                    .map(ReturnedRates::getBid)
+            BigDecimal sum = bids.stream()
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
             LOGGER.trace("Calculated sum = " + sum);
-            LOGGER.trace("Divisor = " + divisor);
             BigDecimal calculationResult = sum.divide(divisor,4,BigDecimal.ROUND_HALF_UP);
             LOGGER.debug("Bids average = " + calculationResult);
 
