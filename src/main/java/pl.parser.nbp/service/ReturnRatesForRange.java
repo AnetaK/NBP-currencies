@@ -2,6 +2,7 @@ package pl.parser.nbp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.parser.nbp.exception.WrongHttpResponce;
 import pl.parser.nbp.model.RequestParams;
 import pl.parser.nbp.model.ReturnedCoursesData;
 import pl.parser.nbp.model.ReturnedRates;
@@ -15,7 +16,7 @@ public class ReturnRatesForRange {
     private List<ReturnedRates> outputData = new ArrayList<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(ReturnRatesForRange.class);
 
-    public List<ReturnedRates> returnRates(RequestParams params) {
+    public List<ReturnedRates> returnRates(RequestParams params) throws WrongHttpResponce {
 
         LocalDate startDate = LocalDate.parse(params.getStartDate());
         LocalDate endDate = LocalDate.parse(params.getEndDate());

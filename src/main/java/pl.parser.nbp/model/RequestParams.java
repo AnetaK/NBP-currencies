@@ -4,16 +4,14 @@ public class RequestParams {
     private String currency;
     private String startDate;
     private String endDate;
-    private String table;
 
     public RequestParams() {
     }
 
-    private RequestParams(String currency, String startDate, String endDate, String table) {
+    private RequestParams(String currency, String startDate, String endDate) {
         this.currency = currency;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.table = table;
     }
 
     public RequestParams withCurrency(String currency) {
@@ -31,13 +29,8 @@ public class RequestParams {
         return this;
     }
 
-    public RequestParams withTable(String table){
-        this.table = table;
-        return this;
-    }
-
     public RequestParams build() {
-        return new RequestParams(currency, startDate, endDate, table);
+        return new RequestParams(currency, startDate, endDate);
     }
 
     public String getCurrency() {
@@ -52,17 +45,12 @@ public class RequestParams {
         return endDate;
     }
 
-    public String getTable() {
-        return table;
-    }
-
     @Override
     public String toString() {
         return "RequestParams{" +
                 "currency='" + currency + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
-                ", table=" + table +
                 '}';
     }
 }

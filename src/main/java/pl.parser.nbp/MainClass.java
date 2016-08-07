@@ -1,6 +1,7 @@
 package pl.parser.nbp;
 
 import pl.parser.nbp.exception.NoDataReturnedFromAPI;
+import pl.parser.nbp.exception.WrongHttpResponce;
 import pl.parser.nbp.model.RequestParams;
 import pl.parser.nbp.model.ReturnedRates;
 import pl.parser.nbp.service.*;
@@ -18,11 +19,10 @@ public class MainClass
         requestParams.withCurrency(currency)
                 .withStartDate(startDate)
                 .withEndDate(endDate)
-                .withTable(TABLE)
                 .build();
 }
 
-    public void calculateAverangeAndDeviation() throws NoDataReturnedFromAPI {
+    public void calculateAverangeAndDeviation() throws NoDataReturnedFromAPI, WrongHttpResponce {
 
         CalculateAverageBidCourse avg = new CalculateAverageBidCourse();
         CalculateAskCourseDeviation dev = new CalculateAskCourseDeviation();

@@ -2,6 +2,7 @@ package pl.parser.nbp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.parser.nbp.exception.WrongHttpResponce;
 import pl.parser.nbp.model.RequestParams;
 
 import java.io.BufferedReader;
@@ -18,7 +19,7 @@ public class AquireDataFromNBP {
     private static final String HTTP_API = "http://api.nbp.pl/api/exchangerates/rates/";
     private static final String TABLE = "c";
 
-    private String getDataFromURL(URL url) {
+    private String getDataFromURL(URL url) throws WrongHttpResponce {
         try {
             LOGGER.debug("Getting data from URL: {}", url.toString());
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -26,7 +27,7 @@ public class AquireDataFromNBP {
             urlConnection.setRequestProperty("Accept", "application/json");
 
             if (urlConnection.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : "
+                throw new WrongHttpResponce("Failed : HTTP error code : "
                         + urlConnection.getResponseCode());
             }
 
@@ -50,7 +51,7 @@ public class AquireDataFromNBP {
         return "";
     }
 
-    public String acuireForSingleDay(String currencyCode, LocalDate date) {
+    public String acuireForSingleDay(String currencyCode, LocalDate date) throws WrongHttpResponce {
         try {
             URL url = new URL(HTTP_API + TABLE + "/" + currencyCode + "/" + date + "/");
             return getDataFromURL(url);
@@ -61,7 +62,7 @@ public class AquireDataFromNBP {
     }
 
 
-    public String acuireForRange(RequestParams requestParams) {
+    public String acuireForRange(RequestParams requestParams) throws WrongHttpResponce {
         try {
             URL url = new URL(HTTP_API + TABLE + "/" + requestParams.getCurrency() +
                     "/" + requestParams.getStartDate() + "/" + requestParams.getEndDate() + "/");
