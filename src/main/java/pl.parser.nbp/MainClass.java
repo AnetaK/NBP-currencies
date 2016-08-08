@@ -11,12 +11,14 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MainClass
-{
+public class MainClass {
     public static void main(String[] args) throws NoDataReturnedFromAPIException, WrongHttpResponceException, WrongInputParametersException {
         RequestParams requestParams = new RequestParams();
         InputValidation validation = new InputValidation();
 
+        if (args.length <= 2) {
+            throw new WrongInputParametersException("Wrong number of parameters - should be 3 (currency code, start date, end date)");
+        }
         requestParams.withCurrency(args[0])
                 .withStartDate(args[1])
                 .withEndDate(args[2])
